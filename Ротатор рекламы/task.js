@@ -1,35 +1,24 @@
-const adv = document.querySelectorAll(".rotator__case")
 
-let counter = 0
-let timer = 1000
+function rotator(interv) {
+    clearInterval(interv)
+    const activEl = document.querySelector(".rotator__case_active"),
+        next = activEl.nextElementSibling !== null ? activEl.nextElementSibling : document.querySelector(".rotator__case");
+    let time = activEl.dataset.speed;
+    console.log(time)
+    activEl.style.color = activEl.dataset.color
 
-function rotator(index) {
-    adv.forEach((el) => {
-        el.classList.remove("rotator__case_active")
-    })
-    adv[index].classList.add("rotator__case_active")
-    adv[index].style.color = adv[index].dataset.color
-    counter++
-    return timer = adv[index + 1].dataset.speed
-    
+
+    interval(activEl, next, time)
+
 }
-console.log(adv[counter + 1].dataset.speed)
-console.log(counter)
-setInterval(() => {
-    if (counter === 6) {
-        counter = 0
-        rotator(counter)
-        return
-    }
 
-    console.log(timer)
-console.log(counter)
+function interval(activEl, next, time) {
 
-    rotator(counter)
-}, timer)
+    interv = setInterval(() => {
+        activEl.classList.remove("rotator__case_active")
+        next.classList.add("rotator__case_active")
+        rotator(interv)
+    }, time)
 
-
-
-
-
-
+}
+rotator()
